@@ -14,6 +14,9 @@ import java.util.List;
 public class Storage {
     private List<DryBulkCargo> dryBulkCargoList = new ArrayList<>();
     private List<Customer> customerList;
+    private int kapazitaet = 1000;
+    private int used;
+    private boolean full;
 
     public int getKapazitaet() {
         return kapazitaet;
@@ -22,10 +25,6 @@ public class Storage {
     public void setKapazitaet(int kapazitaet) {
         this.kapazitaet = kapazitaet;
     }
-
-    private int kapazitaet = 1000;
-    private int used;
-    private boolean full;
 
     // Konstruktor für die Klasse Storage, wird erst später benötigt
     //TODO: 27.04.2023  Konstruktor muss noch implementiert werden---> wegen Kapazitaet und used!

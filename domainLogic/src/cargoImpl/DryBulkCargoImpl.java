@@ -33,6 +33,12 @@ public class DryBulkCargoImpl implements DryBulkCargo, Storable {
         return lastInspectionDate;
     }
 
+    // Methode zum Setzen des letzten Inspektionsdatums, muss hier sein, weil Interface nicht angefasst werden darf!
+    public void setLastInspectionDate(Date date) {
+        this.lastInspectionDate = date;
+
+    }
+
     @Override
     public int getStorageLocation() {
         return 0;
@@ -51,11 +57,5 @@ public class DryBulkCargoImpl implements DryBulkCargo, Storable {
     @Override
     public int getGrainSize() {
         return 0;
-    }
-
-    // Methode zum Setzen des letzten Inspektionsdatums, muss hier sein, weil Interface nicht angefasst werden darf!
-    public void setLastInspectionDate(Date date) {
-        this.lastInspectionDate = date;
-
     }
 }

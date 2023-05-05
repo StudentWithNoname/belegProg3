@@ -5,6 +5,7 @@
 import administration.Storage;
 import cargoImpl.DryBulkCargoImpl;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +16,16 @@ public class Main {
     // muss static sein, da sonst nicht in der main Methode darauf zugegriffen werden kann.
 
     public static void main(String[] args) {
-        Storage testLager = new Storage();
+        /*Storage testLager = new Storage();
         // erstellt ein neues Lager
         DryBulkCargoImpl testCargo = new DryBulkCargoImpl();
         // erstellt ein neues DryBulkCargo
         System.out.println(dryBulkCargoList.size());
-        // gibt die Größe der Liste aus
+        // gibt die Größe der Liste aus*/
+        Storage model = new Storage();
+        //Console viewController = new Console(model);
+
+        //viewController.
+
     }
 }
