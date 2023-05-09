@@ -4,8 +4,9 @@
 // description: This class is only for personal use. Just for fun and testing.
 import administration.Storage;
 import cargoImpl.DryBulkCargoImpl;
+import viewControl.Console;
 
-import java.io.Console;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +24,8 @@ public class Main {
         System.out.println(dryBulkCargoList.size());
         // gibt die Größe der Liste aus*/
         Storage model = new Storage();
-        //Console viewController = new Console(model);
-
-        //viewController.
+        Console viewController = new Console(model);
+        viewController.execute();
 
     }
 }

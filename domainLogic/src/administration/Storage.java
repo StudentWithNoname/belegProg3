@@ -50,6 +50,7 @@ public class Storage {
         } else {
             full = false;
         }
+        kapazitaet--;
         return dryBulkCargoList.add(cargoToAdd);
     }
     // TODO: 27.04.2023  Kapazitaet muss noch implementiert werden
@@ -57,8 +58,10 @@ public class Storage {
     // Methode zum abrufen der Liste bzw. eines Elementes aus der Liste
     public List<DryBulkCargo> abrufen(DryBulkCargo cargoToRead) {
         if (dryBulkCargoList.size() == 0) {
-            throw new UnsupportedOperationException("Liste enthält keine Elemente");
+            System.out.println("Liste enthält keine Elemente");
+           // throw new UnsupportedOperationException("Liste enthält keine Elemente");
         }
+        List<DryBulkCargo> dryBulkCargoListKopie = new ArrayList<>(dryBulkCargoList);
         return dryBulkCargoList;
     }
 
@@ -66,8 +69,17 @@ public class Storage {
     //  Methode zum Entfernen eines Elements aus der Liste
     public boolean entfernen(DryBulkCargo cargoToDelete) {
         if (dryBulkCargoList.size() == 0) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            System.out.println("Liste enthält keine Elemente");
+            //throw new UnsupportedOperationException("Not implemented yet");
         }
+        if (kapazitaet == 1000) {
+            System.out.println("Lager ist leer");
+            //throw new UnsupportedOperationException("Not implemented yet");
+        }
+        else {
+            kapazitaet++;
+        }
+        //kapazitaet++;
         return dryBulkCargoList.remove(cargoToDelete);
     }
     // alte Methode zum setzen des letzten Inspektionsdatums via Date evtl nochmal verwenden bzw. anpassen
