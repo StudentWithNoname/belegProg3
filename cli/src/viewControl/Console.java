@@ -1,19 +1,26 @@
 package viewControl;
 
+import administration.Customer;
+import administration.CustomerImpl;
+import administration.CustomerManagement;
 import administration.Storage;
+import cargo.DryBulkCargo;
 import cargoImpl.DryBulkCargoImpl;
 import util.Command;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Console {
     private Storage model;
+    private CustomerManagement model2;
 
-    public Console(Storage model) {
+    public Console(Storage model, CustomerManagement model2) {
         this.model = model;
+        this.model2 = model2;
     }
 
-    public void execute() {
+    public void execute() throws InstantiationException, IllegalAccessException {
         try (Scanner s = new Scanner(System.in)) {
             do {
                 System.out.println("Bitte geben Sie einen Befehl ein!");
@@ -22,17 +29,32 @@ public class Console {
                 Command c = new Command(s.next());
                 switch (c.operator) {
                     case CREATE:
-                        this.model.einfuegen(DryBulkCargoImpl.class.newInstance());
+                        //this.model.einfuegen(DryBulkCargo
+                       CustomerImpl owner = new CustomerImpl("testkunde");
+                        model2.addCustomer("testkunde");
+                        model.einfuegen(owner, new BigDecimal("232323.232323"),null,4);
                         break;
                     case DELETE:
-                        this.model.entfernen(DryBulkCargoImpl.class.newInstance());
+                        CustomerImpl owner2 = new CustomerImpl("testkunde");
+                        model2.addCustomer("testkunde");
+                        model.einfuegen(owner2, new BigDecimal("232323.232323"),null,4);
+                        model.entfernen("testkunde");
                         break;
                     case READ:
-                        this.model.abrufen(DryBulkCargoImpl.class.newInstance());
+                        CustomerImpl ownerRead = new CustomerImpl("testkunde");
+                        model2.addCustomer("testkunde");
+                        model.einfuegen(ownerRead, new BigDecimal("232323.232323"),null,4);
+
+                        this.model.abrufen("testkunde");
                         break;
                     // Todo Update aendern auf Interface
                     case UPDATE:
-                        this.model.inspektion(DryBulkCargoImpl.class.newInstance());
+                        CustomerImpl ownerUpdate = new CustomerImpl("testkunde");
+                        model2.addCustomer("testkunde");
+                        model.einfuegen(ownerUpdate, new BigDecimal("232323.232323"),null,4);
+                        model.inspektion("testkunde", new BigDecimal("232323.232323"),null,4);
+                        System.out.println("update");
+
                         break;
                     case EXIT:
                         System.out.println("Programm wird beendet");
@@ -41,12 +63,8 @@ public class Console {
                         System.out.println("error");
                         break;
                 }
-                System.out.println(this.model.getKapazitaet());
+                System.out.println("aktuelle Kapazitaet " + this.model.getKapazitaet());
             } while (true);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
         }
     }
 

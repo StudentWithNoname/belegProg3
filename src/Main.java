@@ -2,6 +2,7 @@
 // date: 2023-04-27
 // author: Stefan Ernes;
 // description: This class is only for personal use. Just for fun and testing.
+import administration.CustomerManagement;
 import administration.Storage;
 import cargoImpl.DryBulkCargoImpl;
 import viewControl.Console;
@@ -24,8 +25,14 @@ public class Main {
         System.out.println(dryBulkCargoList.size());
         // gibt die Größe der Liste aus*/
         Storage model = new Storage();
-        Console viewController = new Console(model);
-        viewController.execute();
+        CustomerManagement customerManagement = new CustomerManagement();
+        Console viewController = new Console(model, customerManagement);
+        try {
+            viewController.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         System.out.println(model.getKapazitaet());
 
     }

@@ -6,27 +6,59 @@ package cargoImpl;
 
 import administration.Customer;
 import administration.Storable;
+import administration.Storage;
 import cargo.DryBulkCargo;
 import cargo.Hazard;
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.time.temporal.Temporal;
 import java.util.Collection;
 import java.util.Date;
 
 public class DryBulkCargoImpl implements DryBulkCargo, Storable {
+    private final Customer owner;
 
+    public Date getEingelagertAm() {
+        return eingelagertAm;
+    }
+
+    private Date eingelagertAm;
     private Date lastInspectionDate;
     private int storageLocation;
+    private final BigDecimal value;
+    private final Collection<Hazard> hazards;
+    private final int grainSize;
+    private Duration durationOfStorage;
+
+    public DryBulkCargoImpl(Customer owner, BigDecimal value, Collection<Hazard> hazards, int grainSize) {
+        this.owner = owner;
+        this.eingelagertAm = new Date();
+        this.storageLocation = Storage.getKapazitaet();
+        this.value = value;
+        this.hazards = hazards;
+        this.grainSize = grainSize;
+        this.durationOfStorage = durationOfStorage;
+    }
+
+    /*public DryBulkCargoImpl(Customer owner, int storageLocation, BigDecimal value, Collection<Hazard> hazards, int grainSize, Duration durationOfStorage) {
+        this.owner = owner;
+        this.storageLocation = storageLocation;
+        this.value = value;
+        this.hazards = hazards;
+        this.grainSize = grainSize;
+        this.durationOfStorage = durationOfStorage;
+    }*/
+
 
     @Override
     public Customer getOwner() {
-        return null;
+        return owner;
     }
 
     @Override
     public Duration getDurationOfStorage() {
-        return null;
+        return Duration.between((Temporal) eingelagertAm, (Temporal) lastInspectionDate);
     }
 
     @Override
@@ -42,17 +74,17 @@ public class DryBulkCargoImpl implements DryBulkCargo, Storable {
 
     @Override
     public int getStorageLocation() {
-        return 0;
+        return storageLocation;
     }
 
     @Override
     public BigDecimal getValue() {
-        return null;
+        return value;
     }
 
     @Override
     public Collection<Hazard> getHazards() {
-        return null;
+        return hazards;
     }
 
     @Override

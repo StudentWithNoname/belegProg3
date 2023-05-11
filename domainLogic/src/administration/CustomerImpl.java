@@ -9,6 +9,6 @@ public class CustomerImpl implements Customer{
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 }

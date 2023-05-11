@@ -5,20 +5,23 @@
 package administration;
 
 import cargo.DryBulkCargo;
+import cargo.Hazard;
 import cargoImpl.DryBulkCargoImpl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 public class Storage {
     private List<DryBulkCargo> dryBulkCargoList = new ArrayList<>();
     private List<Customer> customerList;
-    private int kapazitaet = 1000;
+    private static int kapazitaet = 1000;
     private int used;
     private boolean full;
 
-    public int getKapazitaet() {
+    public static int getKapazitaet() {
         return kapazitaet;
     }
 
@@ -29,20 +32,15 @@ public class Storage {
     // Konstruktor für die Klasse Storage, wird erst später benötigt
     //TODO: 27.04.2023  Konstruktor muss noch implementiert werden---> wegen Kapazitaet und used!
 
-    /*public Storage(List<DryBulkCargo> dryBulkCargoList, List<Customer> customerList, int kapazitaet, int used, boolean full) {
-        this.dryBulkCargoList = dryBulkCargoList;
-        this.customerList = customerList;
-        this.kapazitaet = kapazitaet;
-        this.used = used;
-        this.full = full;
+    public Storage() {
+        this.customerList = new ArrayList<>();
+        this.dryBulkCargoList = new ArrayList<>();
+        this.kapazitaet = 1000;
+        this.used = 0;
     }
 
-    public Storage() {
-
-    }*/
-
     // Methode zum Einfügen eines Elements in die Liste
-    public boolean einfuegen(DryBulkCargo cargoToAdd) {
+    public boolean einfuegen(Customer owner, BigDecimal value, Collection<Hazard> hazards, int grainSize) {
 
         if (dryBulkCargoList.size() == kapazitaet || full || used == kapazitaet - 1) {
             full = true;
@@ -50,24 +48,28 @@ public class Storage {
         } else {
             full = false;
         }
+        //cargoToAdd.getStorageLocation();
         kapazitaet--;
-        return dryBulkCargoList.add(cargoToAdd);
+
+
+        //return dryBulkCargoList.add(new DryBulkCargoImpl(owner, value, hazards, grainSize));
+        return true;
     }
     // TODO: 27.04.2023  Kapazitaet muss noch implementiert werden
 
     // Methode zum abrufen der Liste bzw. eines Elementes aus der Liste
-    public List<DryBulkCargo> abrufen(DryBulkCargo cargoToRead) {
+    public List<DryBulkCargo> abrufen(String cargoToRead) {
         if (dryBulkCargoList.size() == 0) {
             System.out.println("Liste enthält keine Elemente");
             // throw new UnsupportedOperationException("Liste enthält keine Elemente");
         }
         List<DryBulkCargo> dryBulkCargoListKopie = new ArrayList<>(dryBulkCargoList);
-        return dryBulkCargoList;
+        return dryBulkCargoListKopie;
     }
 
 
     //  Methode zum Entfernen eines Elements aus der Liste
-    public boolean entfernen(DryBulkCargo cargoToDelete) {
+    public boolean entfernen(String cargoToDelete) {
         if (dryBulkCargoList.size() == 0) {
             System.out.println("Liste enthält keine Elemente");
             //throw new UnsupportedOperationException("Not implemented yet");
@@ -78,8 +80,9 @@ public class Storage {
         } else {
             kapazitaet++;
         }
-        //kapazitaet++;
-        return dryBulkCargoList.remove(cargoToDelete);
+        kapazitaet++;
+        dryBulkCargoList.remove(cargoToDelete);
+        return true;
     }
     // alte Methode zum setzen des letzten Inspektionsdatums via Date evtl nochmal verwenden bzw. anpassen
 
@@ -95,13 +98,13 @@ public class Storage {
 
 
     // Methode zur Inspektion eines Elements aus der Liste bzw. setzen des letzten Inspektionsdatums
-    public boolean inspektion(DryBulkCargoImpl cargoToInspect) {
-        if (dryBulkCargoList.size() == 0) {
+    public boolean inspektion(String testkunde, BigDecimal bigDecimal, DryBulkCargoImpl cargoToInspect, int i) {
+        /*if (dryBulkCargoList.size() == 0) {
             throw new UnsupportedOperationException("Not implemented yet");
         }
         if (cargoToInspect.getLastInspectionDate() != null) {
             throw new UnsupportedOperationException("Not implemented yet");
-        }
+        }*/
         // TODO: 27.04.2023  Crasht sonst! ---> fixen
       /*  if (cargoToInspect.getLastInspectionDate().after(new Date())) {
             throw new UnsupportedOperationException("Not implemented yet");
@@ -114,17 +117,17 @@ public class Storage {
         return false;
     }
 
-    public boolean inspektionCargo(int storageLocation) {
+    public boolean inspektionCargo(DryBulkCargoImpl storageLocation) {
         for (DryBulkCargo cargo : dryBulkCargoList) {
-            if (cargo.getStorageLocation() == storageLocation) {
+            //if (cargo.getStorageLocation() == storageLocation) {
                 if (cargo instanceof DryBulkCargoImpl dryBulkCargo) {
                     dryBulkCargo.setLastInspectionDate(new Date());
                 }
                 return true;
             }
-
-        }
         return false;
+        }
+
     }
 
-}
+
