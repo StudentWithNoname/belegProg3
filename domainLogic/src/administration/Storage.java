@@ -59,7 +59,7 @@ public class Storage {
     public List<DryBulkCargo> abrufen(DryBulkCargo cargoToRead) {
         if (dryBulkCargoList.size() == 0) {
             System.out.println("Liste enthält keine Elemente");
-           // throw new UnsupportedOperationException("Liste enthält keine Elemente");
+            // throw new UnsupportedOperationException("Liste enthält keine Elemente");
         }
         List<DryBulkCargo> dryBulkCargoListKopie = new ArrayList<>(dryBulkCargoList);
         return dryBulkCargoList;
@@ -75,8 +75,7 @@ public class Storage {
         if (kapazitaet == 1000) {
             System.out.println("Lager ist leer");
             //throw new UnsupportedOperationException("Not implemented yet");
-        }
-        else {
+        } else {
             kapazitaet++;
         }
         //kapazitaet++;
@@ -115,10 +114,10 @@ public class Storage {
         return false;
     }
 
-    public boolean inspektionCargo(int lagerPlatz) {
+    public boolean inspektionCargo(int storageLocation) {
         for (DryBulkCargo cargo : dryBulkCargoList) {
-            if (cargo.getStorageLocation() == lagerPlatz) {
-                if (cargo instanceof DryBulkCargoImpl dryBulkCargo){
+            if (cargo.getStorageLocation() == storageLocation) {
+                if (cargo instanceof DryBulkCargoImpl dryBulkCargo) {
                     dryBulkCargo.setLastInspectionDate(new Date());
                 }
                 return true;

@@ -26,6 +26,7 @@ public class Main {
         Storage model = new Storage();
         Console viewController = new Console(model);
         viewController.execute();
+        System.out.println(model.getKapazitaet());
 
     }
 }
