@@ -117,7 +117,7 @@ public class Storage {
         return false;
     }
 
-    public boolean inspektionCargo(DryBulkCargoImpl storageLocation) {
+    public boolean inspektionCargo(int storageLocation) {
         for (DryBulkCargo cargo : dryBulkCargoList) {
             //if (cargo.getStorageLocation() == storageLocation) {
                 if (cargo instanceof DryBulkCargoImpl dryBulkCargo) {

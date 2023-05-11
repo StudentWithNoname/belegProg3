@@ -49,7 +49,7 @@ class StorageTest {
         DryBulkCargoImpl testCargoToRead = new DryBulkCargoImpl(owner, new BigDecimal("222000.0000"), null, 1);
         lagerZuTesten.einfuegen(owner, new BigDecimal("222000.0000"), null, 1);
         //Act
-        List<DryBulkCargo> testAbrufen = lagerZuTesten.abrufen(testCargoToRead);
+        List<DryBulkCargo> testAbrufen = lagerZuTesten.abrufen(testCargoToRead.toString());
         //Assert
         assertEquals(1, testAbrufen.size());
 
@@ -63,7 +63,7 @@ class StorageTest {
         CustomerImpl owner = new CustomerImpl("Mustermann");
         DryBulkCargoImpl testCargoToDelete = new DryBulkCargoImpl(owner, new BigDecimal("222000.0000"), null, 1);
         //Act
-        boolean testEntfernen = lagerZuTesten.entfernen(testCargoToDelete);
+        boolean testEntfernen = lagerZuTesten.entfernen(testCargoToDelete.toString());
         //Assert
         assertTrue(testEntfernen);
     }
