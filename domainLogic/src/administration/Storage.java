@@ -115,4 +115,17 @@ public class Storage {
         return false;
     }
 
+    public boolean inspektionCargo(int lagerPlatz) {
+        for (DryBulkCargo cargo : dryBulkCargoList) {
+            if (cargo.getStorageLocation() == lagerPlatz) {
+                if (cargo instanceof DryBulkCargoImpl dryBulkCargo){
+                    dryBulkCargo.setLastInspectionDate(new Date());
+                }
+                return true;
+            }
+
+        }
+        return false;
+    }
+
 }

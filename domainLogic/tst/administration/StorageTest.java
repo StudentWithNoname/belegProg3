@@ -92,4 +92,19 @@ class StorageTest {
         //Assert
         assertTrue(testInspektion);
     }
+
+    // neue Testmethode um die Inspektion zu testen diesmal mit int location / Test via boolean
+    @org.junit.jupiter.api.Test
+    void inspektionCargo() {
+        //Arrange
+        Storage lagerZuTesten = new Storage();
+        DryBulkCargoImpl testCargoToInspect = new DryBulkCargoImpl();
+        //int testCargoToInspect = new DryBulkCargoImpl();
+        lagerZuTesten.einfuegen(testCargoToInspect);
+
+        //Act
+        boolean testInspektion = lagerZuTesten.inspektionCargo(testCargoToInspect.getStorageLocation());
+        //Assert
+        assertTrue(testInspektion);
+    }
 }

@@ -17,6 +17,7 @@ import java.util.Date;
 public class DryBulkCargoImpl implements DryBulkCargo, Storable {
 
     private Date lastInspectionDate;
+    private int storageLocation;
 
     @Override
     public Customer getOwner() {
